@@ -69,114 +69,7 @@ module controller(funct3, funct7, op, JumpE, BranchE, ZeroE, ResSignE,
         output reg [2:0] ALUControlD, ImmSrcD, BranchD;
         output reg RegWriteD, MemWriteD, ALUSrcD, LUIInstr;
         reg [1:0] ALUOp;
-//  always@(op,funct3,funct7) begin
-//         case(op)
-//             7'b0110011: begin                                     //R
-//                             LUIInstr = 1'b0;
-//                             JumpD = 2'b00;
-//                             BranchD = 3'b000;
-//                             ResultSrcD = 2'b00;
-//                             MemWriteD = 1'b0;
-//                             ALUSrcD = 1'b0;
-//                             RegWriteD = 1'b1;
-//                             if(funct7 == 7'b0000000 && funct3 == 3'b000) ALUControlD = 3'b000;
-//                             else if(funct7 == 7'b0100000 && funct3 == 3'b000) ALUControlD = 3'b001;
-//                             else if(funct7 == 7'b0000000 && funct3 == 3'b111) ALUControlD = 3'b010;
-//                             else if(funct7 == 7'b0000000 && funct3 == 3'b110) ALUControlD = 3'b011;
-//                             else if(funct7 == 7'b0000000 && funct3 == 3'b010) ALUControlD = 3'b100;
-
-//                         end
-
-//             7'b0000011: begin                                   //lw
-//                             LUIInstr = 1'b0;
-//                             JumpD = 2'b00;
-//                             BranchD = 3'b000;
-//                             ResultSrcD = 2'b01;
-//                             MemWriteD = 1'b0;
-//                             ALUControlD = 3'b000;
-//                             ALUSrcD = 1'b1;
-//                             ImmSrcD = 3'b000;
-//                             RegWriteD = 1'b1;
-//                         end
-
-//             7'b0010011: begin                                   //I
-//                             LUIInstr = 1'b0;
-//                             JumpD = 2'b00;
-//                             BranchD = 3'b000;
-//                             ResultSrcD = 2'b00;
-//                             MemWriteD = 1'b0;
-//                             ALUSrcD = 1'b1;
-//                             ImmSrcD = 3'b000;
-//                             RegWriteD = 1'b1;
-//                             if(funct3 == 3'b000) ALUControlD = 3'b000;
-//                             else if(funct3 == 3'b100) ALUControlD = 3'b101;
-//                             else if(funct3 == 3'b110) ALUControlD = 3'b011;
-//                             else if(funct3 == 3'b010) ALUControlD = 3'b100;
-//                         end
-
-//             7'b1100111: begin                                   //jalr
-//                             LUIInstr = 1'b0;
-//                             JumpD = 2'b01;
-//                             BranchD = 3'b000;
-//                             ResultSrcD = 2'b10;
-//                             MemWriteD = 1'b0;
-//                             ALUControlD = 3'b000;
-//                             ALUSrcD = 1'b1;
-//                             ImmSrcD = 3'b000;
-//                             RegWriteD = 1'b1;
-//                         end
-
-//             7'b0100011: begin                                   //S
-//                             LUIInstr = 1'b0;
-//                             JumpD = 2'b00;
-//                             BranchD = 3'b000;
-//                             MemWriteD = 1'b1;
-//                             ALUControlD = 3'b000;
-//                             ALUSrcD = 1'b1;
-//                             ImmSrcD = 3'b001;
-//                             RegWriteD = 1'b0;
-//                         end
-
-//             7'b1101111: begin                                   //jal
-//                             LUIInstr = 1'b0;
-//                             JumpD = 2'b10;
-//                             BranchD = 3'b000;
-//                             ResultSrcD = 2'b10;
-//                             MemWriteD = 1'b0;
-//                             ImmSrcD = 3'b100;
-//                             RegWriteD = 1'b1;
-//                         end
-
-//             7'b1100011: begin                                   //B
-//                             LUIInstr = 1'b0;
-//                             JumpD = 2'b00;
-//                             MemWriteD = 1'b0;
-//                             ALUControlD = 3'b001;
-//                             ALUSrcD = 1'b0;
-//                             ImmSrcD = 3'b010;
-//                             RegWriteD = 1'b0;
-//                             if (funct3 == 3'b000)  BranchD = 3'b001;
-//                             else if (funct3 == 3'b001)  BranchD = 3'b010; 
-//                             else if (funct3 == 3'b100)  BranchD = 3'b011; 
-//                             else if (funct3 == 3'b101)  BranchD = 3'b100; 
-// 			                else BranchD = 3'b000;
-//                         end
-
-//             7'b0110111: begin
-//                             LUIInstr = 1'b1;
-//                             JumpD = 2'b00;
-//                             BranchD = 3'b000;
-//                             ResultSrcD = 2'b11;
-//                             MemWriteD = 1'b0;
-//                             ImmSrcD = 3'b011;
-//                             RegWriteD = 1'b1;
-//                         end
-// 		    default: begin
-//                             JumpD = 2'b00;
-//                             BranchD = 3'b000;
-//                         end
-//         endcase 
-//     end
+  
         always @(op, funct3, funct7) begin
                 {ResultSrcD, MemWriteD, ALUControlD, ALUSrcD, ImmSrcD, RegWriteD, ALUOp, LUIInstr, JumpD, BranchD} = 21'b0;
                 case (op)
@@ -296,16 +189,6 @@ module controller(funct3, funct7, op, JumpE, BranchE, ZeroE, ResSignE,
                         (BranchE == `branchGEq && ResSignE == 1'b0) ? 2'b01:
                         (BranchE == `notBranch && JumpE == `jumpRegister) ? 2'b10:
                         (BranchE == `notBranch && JumpE == `jump) ? 2'b01 : 2'b00;
-        //     always @(ZeroE,ResSignE,JumpE,BranchE) begin
-        // if(BranchE == 3'b000 && JumpE == 2'b00) PCSrcE = 2'b00;
-        // else if(BranchE == 3'b001 && ZeroE) PCSrcE = 2'b01;
-        // else if(BranchE == 3'b010 && ~ZeroE) PCSrcE = 2'b01;
-        // else if(BranchE == 3'b011 && ResSignE) PCSrcE = 2'b01;
-        // else if(BranchE == 3'b100 && ~ResSignE) PCSrcE = 2'b01;
-        // else if(JumpE == 2'b01) PCSrcE = 2'b10;
-        // else if(JumpE == 2'b10) PCSrcE = 2'b01;
-        // else PCSrcE = 2'b00;
-//     end
 endmodule
 
 
