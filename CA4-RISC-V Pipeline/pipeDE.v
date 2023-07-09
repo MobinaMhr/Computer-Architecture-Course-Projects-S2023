@@ -18,46 +18,6 @@ module pipeDE(clk, rst, clr,
         output   [4:0] Rs1E, Rs2E, RdE;
         output   [31:0] RD1E, RD2E, PCE, ExtImmE, PCPlus4E;
 
-	// always@(posedge clk)begin
-
-	// 	if(clr)begin
-	// 		PCE = 32'b0;
-	// 		Rs1E = 32'b0;
-	// 		Rs2E = 32'b0;
-	// 		RdE = 32'b0;
-	// 		ExtImmE = 32'b0;
-	// 		PCPlus4E = 32'b0;
-	// 		RD1E = 32'b0;
-	// 		RD2E = 32'b0;
-	// 		RegWriteE = 1'b0;
-	// 		MemWriteE = 1'b0;
-	// 		ALUSrcE = 1'b0;
-	// 		ResultSrcE = 2'b0;
-	// 		JumpE = 2'b0;
-	// 		BranchE = 3'b0;
-	// 		ALUControlE = 3'b0;
-	// 		LUIInstrE = 1'b0;
-	// 	end
-	// 	else begin
-	// 		PCE = PCD;
-	// 		Rs1E = Rs1D;
-	// 		Rs2E = Rs2D;
-	// 		RdE = RdD;
-	// 		ExtImmE = ExtImmD;
-	// 		PCPlus4E = PCPlus4D;
-	// 		RD1E = RD1D;
-	// 		RD2E = RD2D;
-	// 		RegWriteE = RegWriteD;
-	// 		MemWriteE = MemWriteD;
-	// 		ALUSrcE = ALUSrcD;
-	// 		ResultSrcE = ResultSrcD;
-	// 		JumpE = JumpD;
-	// 		BranchE = BranchD;
-	// 		ALUControlE = ALUControlD;
-	// 		LUIInstrE = LUIInstrD;
-	// 	end
-	// end
-
         regPipe #(1) regWriteReg(clk, rst, clr, 1'b1, RegWriteD, RegWriteE);
         regPipe #(1) memWriteReg(clk, rst, clr, 1'b1, memWriteD, memWriteE);
         regPipe #(1) ALUSrcReg(clk, rst, clr, 1'b1, ALUSrcD, ALUSrcE);
