@@ -24,10 +24,8 @@ module registerFile(clk, rst, A1, A2, A3, WE, WD, RD1, RD2);
                         registers[A3] = WD;
                 end
         end
-        // always @(posedge clk) begin
-                assign RD1 = registers[A1];
-                assign RD2 = registers[A2];
-        // end
+        assign RD1 = registers[A1];
+        assign RD2 = registers[A2];
         integer j;
         always @(posedge clk) begin
                 $display("RF| max in x8: ", registers[8], ",   i in x6: ", registers[6]);
