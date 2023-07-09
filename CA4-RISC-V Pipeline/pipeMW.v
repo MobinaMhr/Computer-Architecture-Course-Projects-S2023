@@ -15,15 +15,7 @@ module pipeMW(clk, rst,
         output [1:0] ResultSrcW;
         output [4:0] RdW;
         output  [31:0] ReadDataW, ExtImmW, PCPlus4W, ALUResultW;
-	// always@(posedge clk)begin
-	// 	RdW = RdM;
-	// 	ExtImmW = ExtImmM;
-	// 	PCPlus4W = PCPlus4M;
-	// 	ALUResultW = ALUResultM;
-	// 	ReadDataW = ReadDataM;
-	// 	RegWriteW = RegWriteM;
-	// 	ResultSrcW = ResultSrcM;
-	// end
+	
         regPipe #(1) regWriteReg(clk, rst, 1'b0, 1'b1, RegWriteM, RegWriteW);
         regPipe #(2) resultSrcReg(clk, rst, 1'b0, 1'b1, ResultSrcM, ResultSrcW);
 
