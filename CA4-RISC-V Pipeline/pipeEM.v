@@ -15,17 +15,7 @@ module pipeEM(clk, rst,
         output  [1:0] ResultSrcM;
         output   [4:0] RdM;
         output   [31:0] ALUResultM, WriteDataM, ExtImmM, PCPlus4M;
-	// always@(posedge clk)begin
-	// 	RdM = RdE;
-	// 	ExtImmM = ExtImmE;	
-	// 	PCPlus4M = PCPlus4E;
-	// 	ALUResultM = ALUResultE;
-	// 	WriteDataM = WriteDataE;
-	// 	ResultSrcM = ResultSrcE; 
-	// 	RegWriteM = RegWriteE;
-	// 	MemWriteM = MemWriteE;
-	// 	LUIInstrM = LUIInstrE;
-	// end
+	
         regPipe #(1) regWriteReg(clk, rst, 1'b0, 1'b1, RegWriteE, RegWriteM);
         regPipe #(1) memWriteReg(clk, rst, 1'b0, 1'b1, memWriteE, memWriteM);
         regPipe #(1) luiReg(clk, rst, 1'b0, 1'b1, LUIInstrE, LUIInstrM);
