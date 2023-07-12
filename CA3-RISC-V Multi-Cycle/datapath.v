@@ -1,7 +1,5 @@
-`timescale 1ns/1ns
-
-module datapath(clk, rst, PCWrite, AdrSrc, MemWrite, IRWrite, ResultSrc, ALUControl, ALUSrcA, ALUSrcB, ImmSrc, RegWrite,
-                        Zero, ALUResSign, funct3, funct7, op);
+module datapath(clk, rst, PCWrite, AdrSrc, MemWrite, IRWrite, ResultSrc, ALUControl, ALUSrcA, 
+                ALUSrcB, ImmSrc, RegWrite, Zero, ALUResSign, funct3, funct7, op);
         input clk, rst;
         input PCWrite, AdrSrc, MemWrite, IRWrite, RegWrite;
         input [1:0] ResultSrc, ALUSrcA, ALUSrcB;

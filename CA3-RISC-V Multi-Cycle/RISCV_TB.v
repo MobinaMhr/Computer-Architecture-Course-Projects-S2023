@@ -1,5 +1,3 @@
-`timescale 1ns/1ns
-
 module RISCV_TB();
         reg clk, rst;
 

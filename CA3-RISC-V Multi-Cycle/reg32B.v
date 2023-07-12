@@ -1,5 +1,3 @@
-`timescale 1ns/1ns
-
 module reg32B(clk, rst, en, dataIn, dataOut);
         input clk, rst, en;
         input [31:0] dataIn;
