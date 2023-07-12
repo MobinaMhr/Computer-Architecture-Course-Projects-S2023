@@ -1,4 +1,3 @@
-`timescale 1ns/1ns
 `define LW 7'b0000011
 `define SW 7'b0100011
 `define BRANCH 7'b1100011
@@ -71,6 +70,7 @@ module controller(Zero, ALUResSign, funct3, funct7, op,
                                 ALUOp = 2'b00;
                                 MemWrite = 1'b1;
                         end
+                        
                         `BRANCH: begin
                                 ALUSrc = 1'b1;
                                 ImmSrc = `B_TYPE;
@@ -78,13 +78,13 @@ module controller(Zero, ALUResSign, funct3, funct7, op,
                                 if (funct3 == `BEQ)
                                         PCSrc = Zero ? `PC_PLUS_IMM : `PC_PLUS_4;
                                 
-                                if (funct3 == `BNE)
+                                else if (funct3 == `BNE)
                                         PCSrc = ~Zero ? `PC_PLUS_IMM : `PC_PLUS_4;
 
-                                if (funct3 == `BLT)
+                                else if (funct3 == `BLT)
                                         PCSrc = ALUResSign ? `PC_PLUS_IMM : `PC_PLUS_4;
 
-                                if (funct3 == `BGE)
+                                else if (funct3 == `BGE)
                                         PCSrc = ~ALUResSign ? `PC_PLUS_IMM : `PC_PLUS_4;
                         end
 
@@ -116,6 +116,7 @@ module controller(Zero, ALUResSign, funct3, funct7, op,
                                 ImmSrc = `J_TYPE;
                                 ALUOp = 2'b00;
                         end
+
                         default: begin
                                 {PCSrc, ResultSrc, MemWrite, ALUControl, ALUSrc, ImmSrc, RegWrite, ALUOp} = 15'b0;
                         end

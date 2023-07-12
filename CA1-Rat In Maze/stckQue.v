@@ -16,7 +16,7 @@ module stckQue(clk, rst, locIn, push, pop, done, run, locOut, move, empStck);
 
         reg [7:0] stackMem [0:255];
         reg [7:0] locOut;
-        integer i = 0;
+        integer i;
 
         always @(posedge clk, posedge rst) begin
                 if (done) begin 

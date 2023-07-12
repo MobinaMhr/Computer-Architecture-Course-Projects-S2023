@@ -1,5 +1,3 @@
-`timescale 1ns/1ns
-
 module datapath(clk, rst, MemWrite, ALUSrc, RegWrite, PCSrc, ResultSrc, ImmSrc, ALUControl,
                         Zero, ALUResSign, funct3, funct7, op);
         input clk, rst;
@@ -11,7 +9,8 @@ module datapath(clk, rst, MemWrite, ALUSrc, RegWrite, PCSrc, ResultSrc, ImmSrc, 
         output [2:0] funct3;
         output [6:0] funct7, op;
 
-        wire [31:0] PCOut, PCNext, PCPlus4, Instr, SrcA, preSrcB, SrcB, ImmExt, ALUResult, PCTarget, MemReadData, RFWriteData;
+        wire [31:0] PCOut, PCNext, PCPlus4, Instr, SrcA, preSrcB, SrcB, ImmExt, 
+                    ALUResult, PCTarget, MemReadData, RFWriteData;
         wire co1, co2;
 
         mux4To1 PCInMux(.in0(PCPlus4), .in1(PCTarget), .in2(ALUResult), .in3(32'bx), .sl(PCSrc), .out(PCNext));
