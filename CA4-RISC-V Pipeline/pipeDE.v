@@ -1,10 +1,8 @@
-`timescale 1ns/1ns
-
 module pipeDE(clk, rst, clr, 
-                RegWriteD, ResultSrcD, MemWriteD, JumpD, BranchD, ALUControlD, ALUSrcD, LUIInstrD,
-                RD1D, RD2D, PCD, Rs1D, Rs2D, RdD, ExtImmD, PCPlus4D,
-                RegWriteE, ResultSrcE, MemWriteE, JumpE, BranchE, ALUControlE, ALUSrcE, LUIInstrE,
-                RD1E, RD2E, PCE, Rs1E, Rs2E, RdE, ExtImmE, PCPlus4E);
+                RegWriteD, ResultSrcD, MemWriteD, JumpD, BranchD, ALUControlD, 
+                ALUSrcD, LUIInstrD, RD1D, RD2D, PCD, Rs1D, Rs2D, RdD, ExtImmD, PCPlus4D,
+                RegWriteE, ResultSrcE, MemWriteE, JumpE, BranchE, ALUControlE, 
+                ALUSrcE, LUIInstrE, RD1E, RD2E, PCE, Rs1E, Rs2E, RdE, ExtImmE, PCPlus4E);
         
         input clk, rst, clr;
         input RegWriteD, MemWriteD, ALUSrcD, LUIInstrD;
@@ -12,11 +10,12 @@ module pipeDE(clk, rst, clr,
         input [2:0] ALUControlD, BranchD;
         input [4:0] Rs1D, Rs2D, RdD;
         input [31:0] RD1D, RD2D, PCD, ExtImmD, PCPlus4D;
-        output   RegWriteE, MemWriteE, ALUSrcE, LUIInstrE;
-        output   [1:0] ResultSrcE, JumpE;
-        output   [2:0] ALUControlE, BranchE;
-        output   [4:0] Rs1E, Rs2E, RdE;
-        output   [31:0] RD1E, RD2E, PCE, ExtImmE, PCPlus4E;
+        
+        output RegWriteE, MemWriteE, ALUSrcE, LUIInstrE;
+        output [1:0] ResultSrcE, JumpE;
+        output [2:0] ALUControlE, BranchE;
+        output [4:0] Rs1E, Rs2E, RdE;
+        output [31:0] RD1E, RD2E, PCE, ExtImmE, PCPlus4E;
 
         regPipe #(1) regWriteReg(clk, rst, clr, 1'b1, RegWriteD, RegWriteE);
         regPipe #(1) memWriteReg(clk, rst, clr, 1'b1, memWriteD, memWriteE);

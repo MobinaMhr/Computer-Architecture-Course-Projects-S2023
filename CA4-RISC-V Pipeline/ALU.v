@@ -1,4 +1,3 @@
-`timescale 1ns/1ns
 `define ALU_SUB 3'b001
 `define ALU_ADD 3'b000
 `define ALU_XOR 3'b100
@@ -27,7 +26,8 @@ module ALU(in1, in2, sl, out, zero, sign);
                                 out = in1 ^ in2;
                         `ALU_SLT:
                                 out = (in1 < in2 ? 32'd1 : 32'd0);
-                        default: out = 32'b0;
+                        default: 
+                                out = 32'b0;
                 endcase
         end
 
