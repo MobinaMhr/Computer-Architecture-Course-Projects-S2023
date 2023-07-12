@@ -1,5 +1,3 @@
-`timescale 1ns/1ns
-
 module mazeMemory(clk, loc, dIn, rd, wr, dOut);
         input clk, dIn, rd, wr;
         input [7:0] loc;

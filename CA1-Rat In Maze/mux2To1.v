@@ -1,5 +1,3 @@
-`timescale 1ns/1ns
-
 module mux2To1(in0, in1, sl, out);
         input [7:0] in0, in1;
         input sl;

@@ -1,4 +1,3 @@
-`timescale 1ns/1ns
 `define STACK 1'b0
 `define QUEUE 1'b1
 
@@ -12,6 +11,7 @@ module stckQue(clk, rst, locIn, push, pop, done, run, locOut, move, empStck);
         reg [7:0] headPointer = 8'b0;
         reg [7:0] mainPointer = 8'b0;
         reg pPopType = `STACK; 
+        
         assign empStck = (pPopType == `STACK)? (headPointer == 8'b0): (mainPointer == headPointer);
 
         reg [7:0] stackMem [0:255];

@@ -1,14 +1,13 @@
-`timescale 1ns/1ns
-`define S0 6'd0
-`define S1 6'd1
-`define S2 6'd2
-`define S3 6'd3
-`define S4 6'd4
-`define S5 6'd5
-`define S6 6'd6
-`define S7 6'd7
-`define S8 6'd8
-`define S9 6'd9
+`define S0  6'd0
+`define S1  6'd1
+`define S2  6'd2
+`define S3  6'd3
+`define S4  6'd4
+`define S5  6'd5
+`define S6  6'd6
+`define S7  6'd7
+`define S8  6'd8
+`define S9  6'd9
 `define S10 6'd10
 `define S11 6'd11
 `define S12 6'd12
@@ -18,6 +17,7 @@
 
 module controller(clk, rst, start, cntReach, empStck, dIn, nxtLoc, curLoc,
                  wr, rd, fail, done, dir, rgLd, pop, push, dOut, adderEn, giveTMem);
+
         input clk, rst, start, cntReach, empStck , dIn;
         input [7:0] nxtLoc, curLoc;
         
@@ -39,22 +39,22 @@ module controller(clk, rst, start, cntReach, empStck, dIn, nxtLoc, curLoc,
 
         always @(ps, start, isDestination, cntReach, noDir, dIn, empStck) begin
                 case (ps)
-                        `S0: ns= start? `S1: `S0;
-                        `S1: ns= `S2;
-                        `S2: ns= `S3;
-                        `S3: ns= isDestination? `S12: `S6;
-                        `S4: ns= noDir? `S8: `S13;
-                        `S5: ns= dIn? `S4: `S7;
-                        `S6: ns= cntReach? `S4: `S5;       
-                        `S7: ns= `S1;
-                        `S8: ns= empStck? `S10: `S9;
-                        `S9: ns= `S1;
-                        `S10: ns= `S11;
-                        `S11: ns= `S0;
-                        `S12: ns= `S15;
-                        `S13: ns= cntReach? `S4: `S5;
-                        `S14: ns= empStck? `S0: `S14;
-                        `S15: ns= `S14;
+                        `S0 : ns = start? `S1: `S0;
+                        `S1 : ns = `S2;
+                        `S2 : ns = `S3;
+                        `S3 : ns = isDestination? `S12: `S6;
+                        `S4 : ns = noDir? `S8: `S13;
+                        `S5 : ns = dIn? `S4: `S7;
+                        `S6 : ns = cntReach? `S4: `S5;       
+                        `S7 : ns = `S1;
+                        `S8 : ns = empStck? `S10: `S9;
+                        `S9 : ns = `S1;
+                        `S10: ns = `S11;
+                        `S11: ns = `S0;
+                        `S12: ns = `S15;
+                        `S13: ns = cntReach? `S4: `S5;
+                        `S14: ns = empStck? `S0: `S14;
+                        `S15: ns = `S14;
                         default: ns = `S0;
                 endcase
         end
