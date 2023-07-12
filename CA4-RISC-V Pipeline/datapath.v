@@ -1,23 +1,23 @@
-`timescale 1ns/1ns
-
 module datapath(clk, rst,
-                RegWriteD, ResultSrcD, MemWriteD, JumpD, BranchD, ALUControlD, ALUSrcD, ImmSrcD, PCSrcE, LUIInstr, // inputs from controller
+                RegWriteD, ResultSrcD, MemWriteD, JumpD, BranchD, 
+                ALUControlD, ALUSrcD, ImmSrcD, PCSrcE, LUIInstr, // inputs from controller
                 StallF, StallD, FlushD, FlushE, ForwardAE, ForwardBE, // inputs from hazard unit
-                ZeroE, ALUResSignE, JumpEOut/*1bit?*/, BranchEOut/*1bit?*/, funct3, funct7, op, // outputs to controller
-                Rs1DHazard, Rs2DHazard, RdEHazard, Rs1EHazard, Rs2EHazard, PCSrcEHazard, ResultSrcEHazard/*1bit?*/, RdMHazard, 
-                        RegWriteMHazard, RdWHazard, RegWriteWHazard); // outputs to hazard unit
+                ZeroE, ALUResSignE, JumpEOut, BranchEOut, funct3, funct7, op, // outputs to controller
+                Rs1DHazard, Rs2DHazard, RdEHazard, Rs1EHazard, Rs2EHazard, PCSrcEHazard, ResultSrcEHazard, RdMHazard, 
+                RegWriteMHazard, RdWHazard, RegWriteWHazard); // outputs to hazard unit
+
         input clk, rst;
         input RegWriteD, MemWriteD, ALUSrcD, LUIInstr, StallF, StallD, FlushD, FlushE;
         input [1:0] ResultSrcD, JumpD, PCSrcE, ForwardAE, ForwardBE;
         input [2:0] ALUControlD, ImmSrcD, BranchD;
-        output  ResultSrcEHazard/*1bit?*/, 
+        output  ResultSrcEHazard, 
                         RegWriteMHazard, RegWriteWHazard;
         output [4:0] RdWHazard, RdMHazard, Rs1EHazard, Rs2EHazard, RdEHazard, Rs2DHazard, Rs1DHazard;
         output ZeroE, ALUResSignE;
         output [1:0] PCSrcEHazard, JumpEOut;
         output [2:0] funct3, BranchEOut;
         output [6:0] funct7, op;
-        // output [4:0] Rs1EHazard, Rs2EHazard;
+
         wire [31:0] PCPlus4F, PCF, secPCF, InstrF;
         wire [31:0] InstrD, RD1D, RD2D, PCD, ExtImmD, PCPlus4D;
         
@@ -87,7 +87,7 @@ module datapath(clk, rst,
         assign Rs2EHazard = Rs2E;
         assign RdEHazard = RdE;
         assign PCSrcEHazard = PCSrcE;
-        assign ResultSrcEHazard = ResultSrcE[0]; // sure?
+        assign ResultSrcEHazard = ResultSrcE[0];
         assign RdMHazard = RdM;
         assign RegWriteMHazard = RegWriteM;
         assign RdWHazard = RdW;

@@ -1,5 +1,3 @@
-`timescale 1ns/1ns
-
 module registerFile(clk, rst, A1, A2, A3, WE, WD, RD1, RD2);
         input clk, rst;
         input [19:15] A1;
@@ -27,8 +25,4 @@ module registerFile(clk, rst, A1, A2, A3, WE, WD, RD1, RD2);
 
         assign RD1 = registers[A1];
         assign RD2 = registers[A2];
-        
-        always @(posedge clk) begin
-                $display("RF| max in x8: ", registers[8], ",   i in x6: ", registers[6]);
-        end
 endmodule

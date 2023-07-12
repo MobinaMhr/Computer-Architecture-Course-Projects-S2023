@@ -1,5 +1,3 @@
-`timescale 1ns/1ns
-
 module pipeMW(clk, rst,
                 RegWriteM, ResultSrcM,
                 ReadDataM, RdM, ExtImmM, PCPlus4M, ALUResultM,

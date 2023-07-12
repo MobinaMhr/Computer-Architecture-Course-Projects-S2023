@@ -1,5 +1,3 @@
-`timescale 1ns/1ns
-
 module extend(inst, sl, out);
         input [31:7] inst;
         input [2:0] sl;

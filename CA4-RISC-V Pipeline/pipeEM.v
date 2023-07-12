@@ -1,20 +1,19 @@
-`timescale 1ns/1ns
-
 module pipeEM(clk, rst,
-                RegWriteE, ResultSrcE, MemWriteE, LUIInstrE,
-                ALUResultE, WriteDataE, RdE, ExtImmE, PCPlus4E,
-                RegWriteM, ResultSrcM, MemWriteM, LUIInstrM,
-                ALUResultM, WriteDataM, RdM, ExtImmM, PCPlus4M);
+              RegWriteE, ResultSrcE, MemWriteE, LUIInstrE,
+              ALUResultE, WriteDataE, RdE, ExtImmE, PCPlus4E,
+              RegWriteM, ResultSrcM, MemWriteM, LUIInstrM,
+              ALUResultM, WriteDataM, RdM, ExtImmM, PCPlus4M);
         
         input clk, rst;
         input RegWriteE, MemWriteE, LUIInstrE;
         input [1:0] ResultSrcE;
         input [4:0] RdE;
         input [31:0] ALUResultE, WriteDataE, ExtImmE, PCPlus4E;
-        output  RegWriteM, MemWriteM, LUIInstrM;
-        output  [1:0] ResultSrcM;
-        output   [4:0] RdM;
-        output   [31:0] ALUResultM, WriteDataM, ExtImmM, PCPlus4M;
+        
+        output RegWriteM, MemWriteM, LUIInstrM;
+        output [1:0] ResultSrcM;
+        output [4:0] RdM;
+        output [31:0] ALUResultM, WriteDataM, ExtImmM, PCPlus4M;
 	
         regPipe #(1) regWriteReg(clk, rst, 1'b0, 1'b1, RegWriteE, RegWriteM);
         regPipe #(1) memWriteReg(clk, rst, 1'b0, 1'b1, memWriteE, memWriteM);

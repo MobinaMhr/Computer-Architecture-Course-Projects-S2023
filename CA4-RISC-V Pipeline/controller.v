@@ -1,4 +1,3 @@
-`timescale 1ns/1ns
 `define LW_OP 7'b0000011
 `define SW_OP 7'b0100011
 `define BRANCH_OP 7'b1100011
@@ -58,8 +57,8 @@
 `define PC_PLUS_IMM 2'b01
 `define PC_PLUS_JADR 2'b10
 
-module controller(funct3, funct7, op, JumpE, BranchE, ZeroE, ResSignE, 
-                RegWriteD, ResultSrcD, MemWriteD, JumpD, BranchD, ALUControlD, ALUSrcD, PCSrcE, ImmSrcD, LUIInstr);
+module controller(funct3, funct7, op, JumpE, BranchE, ZeroE, ResSignE, RegWriteD, ResultSrcD, 
+                  MemWriteD, JumpD, BranchD, ALUControlD, ALUSrcD, PCSrcE, ImmSrcD, LUIInstr);
         input [2:0] funct3;
         input [6:0] funct7, op;
         input ZeroE, ResSignE;
@@ -71,7 +70,8 @@ module controller(funct3, funct7, op, JumpE, BranchE, ZeroE, ResSignE,
         reg [1:0] ALUOp;
   
         always @(op, funct3, funct7) begin
-                {ResultSrcD, MemWriteD, ALUControlD, ALUSrcD, ImmSrcD, RegWriteD, ALUOp, LUIInstr, JumpD, BranchD} = 21'b0;
+                {ResultSrcD, MemWriteD, ALUControlD, ALUSrcD, ImmSrcD, RegWriteD, ALUOp, 
+                 LUIInstr, JumpD, BranchD} = 21'b0;
                 case (op)
                         `LW_OP: begin
                                 ALUSrcD = 1'b1;
@@ -104,7 +104,7 @@ module controller(funct3, funct7, op, JumpE, BranchE, ZeroE, ResSignE,
                                                 (funct3 == `BNE) ? `branchNEq :
                                                 (funct3 == `BLT) ? `branchLEq :
                                                 (funct3 == `BGE) ? `branchGEq :
-                                                3'b101;//this one will never happen
+                                                3'b101; //this one will never happen
                                 ALUSrcD = 1'b0;
                                 ImmSrcD = `B_TYPE_ImmSrc;
                                 ALUOp = 2'b01;
@@ -127,7 +127,6 @@ module controller(funct3, funct7, op, JumpE, BranchE, ZeroE, ResSignE,
                                 JumpD = `jumpRegister;
                                 ALUSrcD = 1'b1;
                                 RegWriteD = 1'b1;
-                                // PCSrc = 2'b10;
                                 ResultSrcD = 2'b10;
                                 ImmSrcD = `I_TYPE_ImmSrc;
                                 ALUOp = 2'b00;
@@ -143,7 +142,8 @@ module controller(funct3, funct7, op, JumpE, BranchE, ZeroE, ResSignE,
                                 ALUOp = 2'b00;
                         end
                         default: begin
-                                {ResultSrcD, MemWriteD, ALUControlD, ALUSrcD, ImmSrcD, RegWriteD, ALUOp, LUIInstr, JumpD, BranchD} = 21'b0;
+                                {ResultSrcD, MemWriteD, ALUControlD, ALUSrcD, ImmSrcD, 
+                                 RegWriteD, ALUOp, LUIInstr, JumpD, BranchD} = 21'b0;
                         end
                 endcase
         end
@@ -179,16 +179,13 @@ module controller(funct3, funct7, op, JumpE, BranchE, ZeroE, ResSignE,
                 endcase
         end 
 
-        assign PCSrcE = (BranchE == `branchEq && ZeroE == 1'b1) ? 2'b01:
-                        (BranchE == `branchEq && ZeroE == 1'b0) ? 2'b00:
-                        (BranchE == `branchNEq && ZeroE == 1'b1) ? 2'b00:
-                        (BranchE == `branchNEq && ZeroE == 1'b0) ? 2'b01:
-                        (BranchE == `branchLEq && ResSignE == 1'b1) ? 2'b01:
-                        (BranchE == `branchLEq && ResSignE == 1'b0) ? 2'b00:
-                        (BranchE == `branchGEq && ResSignE == 1'b1) ? 2'b00:
-                        (BranchE == `branchGEq && ResSignE == 1'b0) ? 2'b01:
-                        (BranchE == `notBranch && JumpE == `jumpRegister) ? 2'b10:
-                        (BranchE == `notBranch && JumpE == `jump) ? 2'b01 : 2'b00;
+        assign PCSrcE = ((BranchE == `branchEq && ZeroE == 1'b1)    || 
+                        (BranchE == `branchNEq && ZeroE == 1'b0)    || 
+                        (BranchE == `branchLEq && ResSignE == 1'b1) || 
+                        (BranchE == `branchGEq && ResSignE == 1'b0) || 
+                        (BranchE == `notBranch && JumpE == `jump))        ? 2'b01 :
+                        (BranchE == `notBranch && JumpE == `jumpRegister) ? 2'b10 : 2'b00;
+
 endmodule
 
 
